@@ -75,8 +75,12 @@
                         <td>@product.ProductId</td>
                         <td>@product.Name</td>
                         <td>@product.StockLevel</td>
+                        <td><a href="Product/Delete/@product.ProductId">Delete</a></td>
+                        <td><a href="Product/Edit/@product.ProductId">Edit</a></td>
+                        <td><a href="Product/Details/@product.ProductId">Detail</a></td>
                     </tr>
                 }
+                <a href="/Product/Create">Create Product</a>
             </tbody>
         </table>
     </div>

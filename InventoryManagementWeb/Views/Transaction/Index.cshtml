@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@model List<InventoryManagementWeb.Models.Transaction>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -39,6 +40,7 @@
         th, td {
             padding: 12px;
             text-align: left;
+            vertical-align: top;
         }
 
         th {
@@ -63,35 +65,24 @@
                 <tr>
                     <th>TransactionID</th>
                     <th>ProductID</th>
+                    <th>Product Name</th>
                     <th>TransactionType</th>
                     <th>Quantity</th>
                     <th>Date</th>
                 </tr>
             </thead>
             <tbody>
-                <!-- Contoh data, ganti dengan data dinamis jika diperlukan -->
-                <tr>
-                    <td>1</td>
-                    <td>101</td>
-                    <td>Sale</td>
-                    <td>3</td>
-                    <td>2023-06-01</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>102</td>
-                    <td>Purchase</td>
-                    <td>5</td>
-                    <td>2023-06-02</td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>103</td>
-                    <td>Sale</td>
-                    <td>2</td>
-                    <td>2023-06-03</td>
-                </tr>
-                <!-- Tambahkan lebih banyak data sesuai kebutuhan -->
+                @foreach(var item in Model)
+                {
+                    <tr>
+                        <td>@item.TransactionId</td>
+                        <td>@item.ProductId</td>
+                        <td>@item.Product.Name</td>
+                        <td>@item.TransactionType</td>
+                        <td>@item.Quantity</td>
+                        <td>@item.Date</td>
+                    </tr>
+                }
             </tbody>
         </table>
     </div>

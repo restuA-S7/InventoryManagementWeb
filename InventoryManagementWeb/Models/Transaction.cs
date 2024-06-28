@@ -16,4 +16,6 @@ public partial class Transaction
     public int? Quantity { get; set; }
 
     public DateTime? Date { get; set; }
+
+    public Product Product { get; set; }
 }

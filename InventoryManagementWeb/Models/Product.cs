@@ -12,4 +12,6 @@ public partial class Product
     public string Name { get; set; }
 
     public int? StockLevel { get; set; }
+
+    public IEnumerable<Transaction> Transactions { get; set; }
 }

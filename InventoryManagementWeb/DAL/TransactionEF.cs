@@ -1,4 +1,5 @@
 ﻿using InventoryManagementWeb.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace InventoryManagementWeb.DAL
 {
@@ -11,7 +12,9 @@ namespace InventoryManagementWeb.DAL
         }
         public Transaction Add(Transaction entity)
         {
-            throw new NotImplementedException();
+            _appDbContext.Transactions.Add(entity);
+            _appDbContext.SaveChanges();
+            return entity;
         }
 
         public void Delete(int id)
@@ -21,7 +24,7 @@ namespace InventoryManagementWeb.DAL
 
         public IEnumerable<Transaction> GetAll()
         {
-            var results = _appDbContext.Transactions.ToList();
+            var results = _appDbContext.Transactions.Include(p=>p.Product).OrderBy(p=>p.TransactionId).ToList();
             return results;
         }
 
