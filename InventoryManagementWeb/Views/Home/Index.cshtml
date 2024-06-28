@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Layout dengan Button</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .content {
+            flex: 1;
+            /* Konten layout Anda yang lain di sini */
+        }
+
+        .button-container {
+            text-align: center;
+            background-color: #fff;
+            padding: 30px;
+            border-top: 1px solid #ccc;
+        }
+
+        .button {
+            display: inline-block;
+            width: 200px;
+            padding: 10px;
+            margin: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+        }
+
+            .button:hover {
+                background-color: #0056b3;
+            }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <!-- Konten layout Anda yang lain di sini -->
+    </div>
+    <div class="button-container">
+        <a href="/Product/index" class="button">Product</a>
+        <a href="/Transaction/index" class="button">Transaction</a>
+    </div>
+</body>
+</html>

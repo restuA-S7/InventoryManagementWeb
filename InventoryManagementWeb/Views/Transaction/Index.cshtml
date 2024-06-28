@@ -1,0 +1,99 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transaction Table</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #e9ecef;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Transaction List</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>TransactionID</th>
+                    <th>ProductID</th>
+                    <th>TransactionType</th>
+                    <th>Quantity</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Contoh data, ganti dengan data dinamis jika diperlukan -->
+                <tr>
+                    <td>1</td>
+                    <td>101</td>
+                    <td>Sale</td>
+                    <td>3</td>
+                    <td>2023-06-01</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>102</td>
+                    <td>Purchase</td>
+                    <td>5</td>
+                    <td>2023-06-02</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>103</td>
+                    <td>Sale</td>
+                    <td>2</td>
+                    <td>2023-06-03</td>
+                </tr>
+                <!-- Tambahkan lebih banyak data sesuai kebutuhan -->
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
