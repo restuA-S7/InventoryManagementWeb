@@ -84,6 +84,7 @@ namespace InventoryManagementWeb.Controllers
             {
                 ViewBag.ErrorMessage = "Product not updated";
                 return View();
+
             }
         }
     }
