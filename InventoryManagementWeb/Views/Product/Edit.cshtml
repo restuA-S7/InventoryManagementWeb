@@ -1,9 +1,11 @@
-﻿<!DOCTYPE html>
+﻿@model InventoryManagementWeb.Models.Product
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Product</title>
+    <title>Edit Product</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -61,15 +63,17 @@
 </head>
 <body>
     <div class="container">
-        <h2>Create Product</h2>
-        <form method="post" action="/Product/Create">
+        <h2>Edit Product</h2>
+        <form method="post" action="/Product/Edit">
+            <input type="hidden" value="@Model.ProductId" name="ProductId" />
+
             <label for="Name">Product Name:</label>
-            <input type="text" id="Name" name="Name" required />
+            <input type="text" id="Name" value="@Model.Name" name="Name" required />
 
-            <label for="StockLevel">Stock Level:</label>
-            <input type="text" id="StockLevel" name="StockLevel" required />
+            <label for="StockLevel">Product Stock:</label>
+            <input type="text" id="StockLevel" value="@Model.StockLevel" name="StockLevel" required />
 
-            <input type="submit" value="Create" />
+            <input type="submit" value="Edit" />
         </form>
     </div>
 </body>

@@ -1,36 +1,64 @@
 ﻿using InventoryManagementWeb.DAL;
 using Microsoft.AspNetCore.Mvc;
 using InventoryManagementWeb.Models;
+using InventoryManagementWeb.ViewModels;
 
 namespace InventoryManagementWeb.Controllers
 {
     public class TransactionController : Controller
     {
         private readonly ITransaction _transactionEF;
-        public TransactionController(ITransaction transactionEF)
+        private readonly IProduct _productEF;
+        public TransactionController(ITransaction transactionEF, IProduct productEF)
         {
             _transactionEF = transactionEF;
+            _productEF = productEF;
         }
-        public IActionResult Index()
+        public IActionResult Index(string name = "")
         {
-            var results = _transactionEF.GetAll();
-            var list = new List<Transaction>();
-            foreach (var result in results)
+            IEnumerable<TransactionViewModel> results;
+            if(name != "")
             {
-                list.Add(new Transaction
-                {
-                    TransactionId = result.TransactionId,
-                    ProductId = result.ProductId,
-                    TransactionType = result.TransactionType,
-                    Quantity = result.Quantity,
-                    Date = result.Date,
-                    Product = new Product
-                    {
-                        Name = result.Product.Name
-                    }
-                });
+                results = _transactionEF.GetTransactionByProductName(name);
             }
-            return View(list);
+            else
+            {
+                results = _transactionEF.GetTransactions();
+            }
+            return View(results);
+
+        }
+
+        public IActionResult Create()
+        {
+            var result = new TransactionViewModel
+            {
+                Products = _productEF.GetAll().ToList()
+            };
+
+            return View(result);
+        }
+
+        [HttpPost]
+        public IActionResult Create(Transaction transaction)
+        {
+            
+            try
+            {
+                var result = _transactionEF.Add(transaction);
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                ViewBag.ErrorMessage = $"Error: {ex.Message}";
+                return View(transaction);
+            }
+        }
+
+        public IActionResult Detail(int id)
+        {
+            var results = _transactionEF.GetProductByIdTransaction(id);
+            return View(results);
         }
     }
 }

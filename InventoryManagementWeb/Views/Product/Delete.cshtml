@@ -1,18 +1,68 @@
 ﻿@model InventoryManagementWeb.Models.Product
 
-
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Delete Product</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        p {
+            font-size: 18px;
+            margin: 10px 0;
+            text-align: center;
+        }
+
+        .buttons {
+            text-align: center;
+        }
+
+        input[type="submit"] {
+            background-color: #dc3545;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+            input[type="submit"]:hover {
+                background-color: #c82333;
+            }
+    </style>
 </head>
 <body>
-    <h2>Delete Product</h2>
-    <form method="post" action="/Product/Delete">
-        <p>Apakah anda yakin akan mendelete Product @Model.Name ?</p>
-        <input type="hidden" value="@Model.ProductId" name="ProductId" />
-        <div>
-            <input type="submit" value="Delete" />
-        </div>
-    </form>
+    <div class="container">
+        <h2>Delete Product</h2>
+        <form method="post" action="/Product/DeletePost">
+            <p>Apakah anda yakin akan menghapus produk <strong>@Model.Name</strong>?</p>
+            <input type="hidden" value="@Model.ProductId" name="ProductId" />
+            <div class="buttons">
+                <input type="submit" value="Delete" />
+            </div>
+        </form>
+    </div>
 </body>
 </html>

@@ -5,8 +5,8 @@ namespace InventoryManagementWeb.DAL
 {
     public class ProductEF : IProduct
     {
-        private readonly AppDbContext _appDbContext;
-        public ProductEF(AppDbContext appDbContext)
+        private readonly InventoryDbContext _appDbContext;
+        public ProductEF(InventoryDbContext appDbContext)
         {
                _appDbContext = appDbContext;
         }
@@ -44,7 +44,7 @@ namespace InventoryManagementWeb.DAL
         public Product Update(Product entity)
         {
             var updateProduct = GetById(entity.ProductId);
-            if(updateProduct == null)
+            if(updateProduct != null)
             {
                 updateProduct.Name = entity.Name;
                 updateProduct.StockLevel = entity.StockLevel;

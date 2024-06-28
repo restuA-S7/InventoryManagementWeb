@@ -17,5 +17,5 @@ public partial class Transaction
 
     public DateTime? Date { get; set; }
 
-    public Product Product { get; set; }
+    public virtual Product Product { get; set; }
 }

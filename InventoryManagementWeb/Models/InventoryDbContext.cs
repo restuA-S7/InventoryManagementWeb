@@ -34,6 +34,10 @@ public partial class InventoryDbContext : DbContext
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
             entity.Property(e => e.ProductId).HasColumnName("ProductID");
+
+            entity.HasOne(d => d.Product).WithMany(p => p.Transactions)
+                .HasForeignKey(d => d.ProductId)
+                .HasConstraintName("FK_Transactions_Products");
         });
 
         OnModelCreatingPartial(modelBuilder);

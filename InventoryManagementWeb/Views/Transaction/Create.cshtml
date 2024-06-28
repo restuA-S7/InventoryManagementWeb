@@ -1,0 +1,144 @@
+﻿@model InventoryManagementWeb.ViewModels.TransactionViewModel
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Transaction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column; /* Mengatur elemen menjadi kolom */
+            justify-content: space-between; /* Menyebar elemen secara vertikal */
+            min-height: 100vh; /* Mengisi seluruh tinggi viewport */
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #007bff; /* Warna biru yang sesuai dengan tombol */
+            padding: 10px 20px;
+            color: white;
+        }
+
+            header a {
+                color: white;
+                text-decoration: none;
+                margin-left: 20px;
+            }
+
+        .container {
+            max-width: 600px;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin: auto; /* Memusatkan kontainer */
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: grid;
+            gap: 15px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="date"] {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 10px; /* Margin tambahan di bagian bawah tombol */
+        }
+
+            input[type="submit"]:hover {
+                background-color: #0056b3;
+            }
+
+        .error-message {
+            color: red;
+            margin-top: 10px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px 0;
+            background-color: #f1f1f1;
+        }
+
+        .footer-text {
+            color: #343a40;
+        }
+    </style>
+</head>
+<body>
+    
+
+    <div class="container">
+        <h2>Create Transaction</h2>
+        @if (ViewBag.ErrorMessage != null)
+        {
+            <div class="error-message">@ViewBag.ErrorMessage</div>
+        }
+        <form asp-action="Create" method="post">
+            <div class="form-group">
+                <label for="ProductId">Product Name</label>
+                <select class="form-control" name="ProductId" id="ProductId">
+                    @foreach (var product in Model.Products )
+                    {
+                        <option value="@product.ProductId">@product.Name</option>
+                    }
+                </select>
+            </div>
+            <div>
+                <label for="TransactionType">Transaction Type:</label>
+                <select type="text" id="TransactionType" name="TransactionType" required>
+                    <option value="true">Add</option>
+                    <option value="false">Remove</option>
+                </select>
+            </div>
+            <div>
+                <label for="Quantity">Quantity:</label>
+                <input type="text" id="Quantity" name="Quantity" value="@Model.Quantity" required />
+            </div>
+            <div>
+                <label for="Date">Date:</label>
+                <input type="date" id="Date" name="Date" value="@Model.Date" />
+            </div>
+            <div>
+                <input type="submit" value="Create" />
+            </div>
+        </form>
+    </div>
+
+    <footer>
+        <div class="footer-text">© 2024 - InventoryManagementWeb - Privacy</div>
+    </footer>
+</body>
+</html>

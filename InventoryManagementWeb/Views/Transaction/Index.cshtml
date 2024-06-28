@@ -1,10 +1,11 @@
-﻿@model List<InventoryManagementWeb.Models.Transaction>
+﻿@model List<InventoryManagementWeb.ViewModels.TransactionViewModel>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Transaction Table</title>
+    <title>Transaction List</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -14,33 +15,32 @@
         }
 
         .container {
-            max-width: 1000px;
+            max-width: 100%;
             margin: 0 auto;
             background-color: #fff;
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            overflow-x: auto; /* To handle overflow */
+            margin-bottom: 20px; /* Added margin bottom for spacing */
         }
 
-        h1 {
+        h2 {
             text-align: center;
             color: #333;
+            margin-bottom: 20px;
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
-            margin: 20px 0;
-        }
-
-        table, th, td {
-            border: 1px solid #ddd;
+            margin-top: 20px;
         }
 
         th, td {
+            border: 1px solid #ddd;
             padding: 12px;
             text-align: left;
-            vertical-align: top;
         }
 
         th {
@@ -55,32 +55,109 @@
         tr:hover {
             background-color: #e9ecef;
         }
+
+        .actions {
+            white-space: nowrap;
+        }
+
+            .actions a {
+                display: inline-block;
+                margin-right: 8px;
+                padding: 5px 10px;
+                color: #007bff;
+                text-decoration: none;
+                border: 1px solid #007bff;
+                border-radius: 4px;
+                transition: background-color 0.3s, color 0.3s;
+            }
+
+                .actions a:hover {
+                    background-color: #0056b3;
+                    color: white;
+                }
+
+        .create-link {
+            display: inline-block;
+            margin-bottom: 15px;
+            color: #fff;
+            background-color: #007bff;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+            text-align: center;
+        }
+
+            .create-link:hover {
+                background-color: #0056b3;
+            }
+
+            .create-link:disabled {
+                background-color: #007bff;
+                color: #007bff;
+                cursor: not-allowed;
+            }
+
+        .transaction-type {
+            text-align: center; 
+            padding: 10px; 
+            border-radius: 10px;
+            font-weight: bold;
+        }
+
+            .transaction-type.add {
+                background-color: #4CAF50; 
+                color: white;
+            }
+
+            .transaction-type.remove {
+                background-color: #f44336; 
+                color: white;
+            }
+
+            .transaction-type.unknown {
+                background-color: #cccccc; 
+                color: black;
+            }
+
+
     </style>
 </head>
 <body>
+        <h2>Transaction List</h2>
     <div class="container">
-        <h1>Transaction List</h1>
+        <form class="form-inline" method="post" action="/Transaction/Index">
+            <input type="text" class="form-control mb-2 mr-sm-2" name="Name" placeholder="Search Product Name">
+            <button type="submit" class="btn btn-primary mb-2">Search</button>
+        </form>
+        <a class="create-link" href="/Transaction/Create">Create Transaction</a>
         <table>
             <thead>
                 <tr>
-                    <th>TransactionID</th>
-                    <th>ProductID</th>
+                    <th>Transaction ID</th>
+                    <th>Product ID</th>
                     <th>Product Name</th>
-                    <th>TransactionType</th>
+                    <th>Transaction Type</th>
                     <th>Quantity</th>
                     <th>Date</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach(var item in Model)
+                @foreach (var transaction in Model)
                 {
                     <tr>
-                        <td>@item.TransactionId</td>
-                        <td>@item.ProductId</td>
-                        <td>@item.Product.Name</td>
-                        <td>@item.TransactionType</td>
-                        <td>@item.Quantity</td>
-                        <td>@item.Date</td>
+                        <td>@transaction.TransactionId</td>
+                        <td>@transaction.ProductId</td>
+                        <td>@transaction.Name</td>
+                        <td class="transaction-type @(transaction.TransactionType.HasValue ? (transaction.TransactionType.Value ? "add" : "remove") : "unknown")">
+                            @(transaction.TransactionType.HasValue ? (transaction.TransactionType.Value ? "Add" : "Remove") : "Unknown")
+                        </td>
+                        <td>@transaction.Quantity</td>
+                        <td>@transaction.Date</td>
+                        <td class="actions">
+                            <a href="/Transaction/Detail/@transaction.TransactionId">Detail</a>
+                        </td>
                     </tr>
                 }
             </tbody>

@@ -13,5 +13,5 @@ public partial class Product
 
     public int? StockLevel { get; set; }
 
-    public IEnumerable<Transaction> Transactions { get; set; }
+    public virtual ICollection<Transaction> Transactions { get; set; } = new List<Transaction>();
 }

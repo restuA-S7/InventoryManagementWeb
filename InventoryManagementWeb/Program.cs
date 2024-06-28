@@ -1,4 +1,5 @@
 using InventoryManagementWeb.DAL;
+using InventoryManagementWeb.Models;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -6,7 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 var conecction = builder.Configuration.GetConnectionString("MyDB");
 
 //register dbcontex ef
-builder.Services.AddDbContext<AppDbContext>(options =>
+builder.Services.AddDbContext<InventoryDbContext>(options =>
 {
     options.UseSqlServer(conecction);
 });

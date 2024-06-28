@@ -11,6 +11,7 @@ namespace InventoryManagementWeb.Controllers
         {
             _productEF = productEF;
         }
+
         public IActionResult Index()
         {
             var result = _productEF.GetAll();
@@ -32,7 +33,6 @@ namespace InventoryManagementWeb.Controllers
             }
             catch
             {
-
                 ViewBag.ErrorMessage = "Product not added";
                 return View();
             }
@@ -84,7 +84,6 @@ namespace InventoryManagementWeb.Controllers
             {
                 ViewBag.ErrorMessage = "Product not updated";
                 return View();
-
             }
         }
     }

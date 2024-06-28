@@ -1,11 +1,11 @@
-﻿@model InventoryManagementWeb.Models.Product
+﻿@model InventoryManagementWeb.ViewModels.TransactionViewModel
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Detail Product</title>
+    <title>Detail Transaction</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -40,9 +40,13 @@
 </head>
 <body>
     <div class="container">
-        <h1>Product Details</h1>
-        <p><span class="label">Product Name:</span> @Model.Name</p>
-        <p><span class="label">Stock Level:</span> @Model.StockLevel</p>
+        <h1>Transaction Details</h1>
+        <p><span class="label">Transaction Id: </span> @Model.TransactionId</p>
+        <p><span class="label">Product Id: </span> @Model.ProductId</p>
+        <p><span class="label">Product Name: </span> @Model.Name</p>
+        <p><span class="label">Transaction Type: </span>@(Model.TransactionType.HasValue ? (Model.TransactionType.Value ? "Add" : "Remove") : "Unknown")</p>
+        <p><span class="label">Quantity: </span> @Model.Quantity</p>
+        <p><span class="label">Date: </span> @Model.Date</p>
     </div>
 </body>
 </html>
