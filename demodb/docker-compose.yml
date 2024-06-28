@@ -22,14 +22,15 @@ services:
     networks:
       - trainingnet
 
-  # webapiapp:
-  #   build:
-  #     context: ../webapidemo
-  #     dockerfile: WebApiDemo/Dockerfile
-  #   ports:
-  #     - "8080:8080"
-  #   networks:
-  #     - trainingnet
+  hang.ui:
+    image: hangui
+    build:
+      context: ../InventoryManagementWeb
+      dockerfile: HangFire/Dockerfile
+    ports:
+      - "5005:80"
+    networks:
+      - trainingnet
 
   # simpleetl:
   #   build:
