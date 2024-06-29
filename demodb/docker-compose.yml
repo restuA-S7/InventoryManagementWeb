@@ -23,43 +23,16 @@ services:
       - trainingnet
 
   hang.ui:
-    image: hangui
     build:
       context: ../InventoryManagementWeb
       dockerfile: HangFire/Dockerfile
     ports:
-      - "5005:80"
+      - "5005:8080"
     networks:
       - trainingnet
-
-  # simpleetl:
-  #   build:
-  #     context: ../SimpleETL
-  #     dockerfile: SimpleETL/Dockerfile
-  #   volumes:
-  #     - ./csvdata:/csvdata
-  #   networks:
-  #     - trainingnet
-
-  # workeretl:
-  #   build:
-  #     context: ../HangFireDemo
-  #     dockerfile: HangFireDemo/Dockerfile
-  #   environment:
-  #     - ASPNETCORE_ENVIRONMENT=development
-  #   ports:
-  #     - "8082:8080"
-  #   networks:
-  #     - trainingnet
-
-  # workeretl:
-  #   build:
-  #     context: ../ETLWorkerService
-  #     dockerfile: ETLWorkerService/Dockerfile
-  #   volumes:
-  #     - ./csvdata:/csvdata
-  #   networks:
-  #     - trainingnet
+    restart: always
+    depends_on:
+      - db
   
   # dbtool:
   #   image: mcr.microsoft.com/mssql-tools
@@ -71,3 +44,4 @@ volumes:
 
 networks:
   trainingnet:
+    driver: bridge

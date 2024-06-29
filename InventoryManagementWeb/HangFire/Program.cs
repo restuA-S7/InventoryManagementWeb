@@ -1,5 +1,7 @@
 using Hangfire;
+using Hangfire.Dashboard;
 using Hangfire.SqlServer;
+using HangFire.Dashboard;
 using HangFire.Models;
 using HangFire.Service;
 using Microsoft.EntityFrameworkCore;
@@ -43,12 +45,24 @@ builder.Services.AddHangfireServer();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
+
 app.UseSwagger();
 app.UseSwaggerUI();
 
+
 app.UseHttpsRedirection();
 
-app.UseHangfireDashboard();
+// app.UseHangfireDashboard("/hangfire", new DashboardOptions
+// {
+//     Authorization = new[] { new MyAuthorizationFilter() }
+// });
+
+var options = new DashboardOptions()
+{
+    Authorization = new[] { new MyAuthorizationFilter() }
+};
+
+app.UseHangfireDashboard("/Hangfire",options);
 
 app.UseAuthorization();
 
@@ -79,3 +93,8 @@ RecurringJob.AddOrUpdate<TransactionServices>(
     "*/5 * * * * *");
 
 app.Run();
+
+public class MyAuthorizationFilter : IDashboardAuthorizationFilter
+{
+    public bool Authorize(DashboardContext context) => true;
+}
